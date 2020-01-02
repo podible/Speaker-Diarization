@@ -33,6 +33,12 @@ def parse_arguments():
       description='Model configurations.', add_help=False)
 
   model_parser.add_argument(
+      '--wav_path',
+      default='',
+      type=str,
+      help='To not error')
+
+  model_parser.add_argument(
       '--observation_dim',
       default=_DEFAULT_OBSERVATION_DIM,
       type=int,
