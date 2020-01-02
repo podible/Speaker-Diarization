@@ -204,5 +204,5 @@ def main(wav_path, embedding_per_second=1.0, overlap_rate=0.5):
     p.plot.show()
 
 if __name__ == '__main__':
-    main(r'wavs/rmdmy.wav', embedding_per_second=1.2, overlap_rate=0.4)
+    main(r'wavs/custom_file.wav', embedding_per_second=1.2, overlap_rate=0.4)
 
