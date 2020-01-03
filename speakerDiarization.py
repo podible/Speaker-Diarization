@@ -1,6 +1,7 @@
 
 """A demo script showing how to DIARIZATION ON WAV USING UIS-RNN."""
 
+import json
 import numpy as np
 import uisrnn
 import librosa
@@ -19,6 +20,7 @@ import argparse
 parser = argparse.ArgumentParser()
 # set up training configuration.
 parser.add_argument('--wav_path', type=str)
+parser.add_argument('--out_path', type=str)
 parser.add_argument('--gpu', default='', type=str)
 parser.add_argument('--resume', default=r'ghostvlad/pretrained/weights.h5', type=str)
 parser.add_argument('--data_path', default='4persons', type=str)
@@ -190,14 +192,22 @@ def main(wav_path, embedding_per_second=1.0, overlap_rate=0.5):
             speakerSlice[spk][tid]['start'] = s
             speakerSlice[spk][tid]['stop'] = e
 
+    for_json = {}
     for spk,timeDicts in speakerSlice.items():
         print('========= ' + str(spk) + ' =========')
+        for_json[str(spk)] = []
         for timeDict in timeDicts:
             s = timeDict['start']
             e = timeDict['stop']
+            for_json[str(spk)] += [(s / 1000, e / 1000)]
             s = fmtTime(s)  # change point moves to the center of the slice
             e = fmtTime(e)
             print(s+' ==> '+e)
+
+    if args.out_path:
+        print('about to try', for_json)
+        with open(args.out_path, "w+", encoding = 'utf-8') as f:
+            f.write(json.dumps(for_json))
 
     p = PlotDiar(map=speakerSlice, wav=wav_path, gui=True, size=(25, 6))
     p.draw()

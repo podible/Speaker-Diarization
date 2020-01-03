@@ -39,6 +39,12 @@ def parse_arguments():
       help='To not error')
 
   model_parser.add_argument(
+      '--out_path',
+      default='',
+      type=str,
+      help='To not error')
+
+  model_parser.add_argument(
       '--observation_dim',
       default=_DEFAULT_OBSERVATION_DIM,
       type=int,
