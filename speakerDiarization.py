@@ -209,10 +209,6 @@ def main(wav_path, embedding_per_second=1.0, overlap_rate=0.5):
         with open(args.out_path, "w+", encoding = 'utf-8') as f:
             f.write(json.dumps(for_json))
 
-    p = PlotDiar(map=speakerSlice, wav=wav_path, gui=True, size=(25, 6))
-    p.draw()
-    p.plot.show()
-
 if __name__ == '__main__':
     main(args.wav_path, embedding_per_second=1.2, overlap_rate=0.4)
 
